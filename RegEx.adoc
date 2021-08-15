@@ -1,0 +1,37 @@
+= Regular Expression... for beginning or refreshing ..
+
+== What's there to know
+=======================
+* One letter pattern
+* Matching a word
+* Matching repeated pattern
+* Word/String boundaries
+* Subexpression
+* Backreference
+* Look-around
+* Conditional Search
+* Python RegEx
+=======================
+If you program or perform a day-to-day works using a computer long enough, you will inevitably come across occasions where you want to:
+
+1. check if a certain string is present in the given string
+1. apply modification to only certain words or sentence 
+
+Depending on the urgency and complexity of the task, you will decide to deploy on of the following method (in adcending order of complexity):
+
+1. Eyeball and Quick-hand Method
+1. Find/Replace function provided by the editor
+1. Regular Expression
+1. String Manipulation Programming
+1. Parser
+
+Regular Expression is a mini language that can boost the efficiency and effectiveness of pattern finding/replacing that can be embedded into programming languages (perl, python, JavaScript) or tools (grep, vim, Microsoft Word, Microsoft SQL Server). 
+This mini languages is used to define patterns to be used in search and replacement. 
+The hosting tool provide ways to define Regular Expression pattern, and methods to find or replace the pattern against a target string. Here is a example using python.
+[source, python]
+import re
+pattern = re.compile(r'Hello') # define a pattern
+pattern.match('Hello World')   # match the pattern against a target string
+
+
+ 
