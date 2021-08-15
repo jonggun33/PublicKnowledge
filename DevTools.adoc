@@ -1,0 +1,9 @@
+= Tools for Computing
+
+== Git
+=== Merging two repositories
+[source, bash]
+git remote add [new branch/repository name] [url]
+git fetch [new branch name]
+git merge remotes/[new branch name]/master
+

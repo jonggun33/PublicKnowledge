@@ -1,0 +1,11 @@
+= C#
+:toc: left
+:sectnums:
+
+== Grammar
+https://076923.github.io/posts/#python-tkinter[Posts | 076923]
+
+=== Delegates
+https://www.akadia.com/services/dotnet_delegates_and_events.html[Delegates and Events in C# / .NET]
+
+== Mixing with C++

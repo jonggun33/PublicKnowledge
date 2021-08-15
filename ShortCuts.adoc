@@ -1,0 +1,25 @@
+= Shortcuts
+:toc: left
+:sectnums:
+
+
+== Vim
+=== Move
+
+=== Macro
+* q.: record a macro named []. q once again to end recording
+* @.: play a macro named []
+
+=== Delete
+
+=== Replace
+
+
+== Windows
+
+== Excel
+
+== Visual Studio Code
+
+== Jupyter Notebook
+
