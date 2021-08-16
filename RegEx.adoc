@@ -32,6 +32,4 @@ The hosting tool provide ways to define Regular Expression pattern, and methods 
 import re
 pattern = re.compile(r'Hello') # define a pattern
 pattern.match('Hello World')   # match the pattern against a target string
-
-
  
