@@ -32,4 +32,17 @@ The hosting tool provide ways to define Regular Expression pattern, and methods 
 import re
 pattern = re.compile(r'Hello') # define a pattern
 pattern.match('Hello World')   # match the pattern against a target string
- 
+
+If you aim to match one or two pattern(s) from the target string, Regular Expression is sufficient, but if you want to extrat set of elements that compromise a structured documents such as XML or programming source code, parser can be much more handy choice.
+
+=== Concise but comprehensive Regular Expression Use Cases
+This section lists simplified versions of all the RegEx use cases covered in this book whose details will be explained in fuller detail in respective chapters.
+I will focus on the grammar of the Regular Expression, hiding the detials of details that will vary according to the tool of your choice. +
+
+First, matching a letter from a string is the siplest form of valid regular expression.
+[source, bash]
+target: this is my happiest X-mas
+pattern: X 
+result: this is my happies X-mas
+
+sdf
