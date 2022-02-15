@@ -126,6 +126,20 @@ echo Good night > merge/d
 rm merge/b
 
 == Docker
+=== Installation
+==== using script
+[source, bash]
+curl -fsSL https://get.docker.com -o install.sh
+less install.sh
+chmod +x install.sh 
+install.sh 
+
+==== using apt-get
+[source, bash]
+uname -r #check the version
+cat /etc/os-release
+NAME="Ubuntu"
+VERSION="18.04.5 LTS (Bionic Beaver)"
 
 [source, bash]
 apt-get update    
@@ -150,9 +164,88 @@ apt-get update
 apt-get install -y docker-ce
 docker container engine 을 설치한다.
 
-=== Running/Starting
+[source, bash]
+vim /etc/apt/sources.list #오타 수정 
 
+=== Managing Docker Service
+[source, bash]
+systemctl status docker 
+systemctl enable docker  --> docker 를 시스템 부팅 시 자동 실행 
+systemctl restart docker 
+systemctl stop docker 
+systemctl start docker 
 
+=== Running Container
+==== Interactive
+[source, bash]
+docker container run -it --name c1 centos /bin/ping localhost
+
+==== Detached
+[source, bash]
+docker container run -d --name web httpd
+docker container logs web
+docker container exec -it web /bin/bash
+
+[source, bash]
+docker container inspect web | grep IPAddr
+curl -sf http://172.17.0.3
+
+==== Copy
+[source, bash]
+docker container cp hostfile  test00:/containerfile
+docker container exec test00  cat /containerfile
+docker container cp test00:/containerfile    hostfile
+
+==== 모든컨테이너 일괄 삭제하기 
+[source, bash]
+alias conrm='docker container rm -f $(docker container ps -aq)'
+
+==== docker container diff 실습
+[source, bash]
+docker container run -it --name test01  centos
+docker container inspect test01 | grep -C2 UpperDir
+
+==== Networking
+[source, bash]
+======================
+docker container run -d --name web1 -p 8080:80 nginx
+docker container run -d --name web2 -p 8181:80 nginx
+
+docker container inspect web1 | grep IPAddr
+                  "IPAddress": "172.17.0.2",
+
+docker container inspect web2 | grep IPAddr
+                  "IPAddress": "172.17.0.3",
+
+echo "This is web1 server" > index.html
+docker container cp index.html  web1:/usr/share/nginx/html/index.html
+
+echo "This is web2 server" > index.html
+docker container cp index.html web2:/usr/share/nginx/html/index.html
+
+curl -sf http://172.17.0.2
+This is web1 server
+This is web2 server
+
+web browser 
+http://192.168.137.101:8080
+http://192.168.137.101:8080
+
+docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+5db7f0b30b02   bridge    bridge    local
+515d21ee2b86   host      host      local
+fc133b3066a6   none      null      local
+
+docker network inspect bridge
+
+docker container run -it --name host00 --net host centos
+docker container run -it --name none00 --net none centos
+======================
+
+== Useful Unix Commands
+[source, bash]
+watch -n 1 docker container ps -a
 
 
 
