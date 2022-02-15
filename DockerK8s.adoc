@@ -1,0 +1,299 @@
+= Cloud Native
+
+유 미 (takytaky@empas.com)
+
+접속 방법 
+window+r (실행창)
+mstsc 
+
+--------------------------------
+실습 환경 설정하기
+--------------------------------
+1) virtualbox 프로그램 설치 
+2) oracle virtualbox extension pack 설치 
+Oracle VM VirtualBox 관리자
+파일 
+	--> 환경설정
+	--> 확장 --> [+] --> 확장팩 위치 선택 --> 열기
+	--> 설치 
+	--> VirtualBox 라이선스 (스크롤 다운) --> 동의합니다.
+	--> 확인 * 3
+
+
+3) 가상 머신 가져오기(import)  ubuntu18.04
+Oracle VM VirtualBox 관리자
+파일 
+	--> 가상 시스템 가져오기  
+	--> (파일) 탐색기 --> 수업 파일 --> master_k8s.ova 선택 --> 열기
+	--> 다음 
+
+	이름 : master
+	CPU : 1
+	MAC 주소 정책: 모든 네트워크 어댑터의 새 MAC 주소 생성
+
+	--> 가져오기
+
+오류시 
+C:\Users\HPE\VirtualBox VMs\master 폴더 삭제 후 다시 진행 
+
+ID : worker1 (일반사용자)
+PW : ubuntu 
+
+ID: root (관리자)
+PW : ubuntu 
+
+4)  가상머신 통신 (네트워크 연결 상태 확인) 
+마우스 우클릭 --> Open Terminal 
+
+$ ping google.com
+
+
+windows key --> 톱니바퀴(제어판) 
+	--> 네트워크 및 인터넷 
+	--> 어댑터 옵션 변경 
+	--> 이더넷(네트워크) 선택 --> 마우스 우클릭 --> 속성 
+	--> 공유 탭 선택 
+	--> [v] 다른 네트워크 사용자가 이 컴퓨터의 인터넷 연결을 통해 연결할 수 있도록 허용 
+
+	--> 확인 
+	--> 예
+
+$ ping google.com
+ctrl+c
+
+5) ssh 를 사용해서 linux(ubuntu) root 사용자로 로그인 허용 
+
+$ sudo gedit /etc/ssh/sshd_config
+[sudo] password for worker1: ubuntu 
+	#PermitRootLogin prohibit-password 
+		--> PermitRootLogin yes 
+
+		--> 우측 상당 [Save] 버튼 
+		--> [x]
+
+$ sudo systemctl restart sshd 
+$ ip addr 
+	enp0s3 inet 192.168.137.101
+
+6) putty 터미널 사용연결 
+수업 파일 폴더 putty.exe 실행 
+Host Name : 192.168.137.101
+
+	Terminal --> Keyboard --> The Backspace key (Control-H)
+	Window --> Appearance --> Font settings --> Change
+	Session --> Saved Sessions : master  --> Save
+
+	master 더블클릭 실행 
+	--> Accept 
+login as: root 
+root @192.168.137.101's password:   ubuntu
+
+# cat  /etc/os-release 
+	--> 실습 리눅스 버전 확인 
+
+
+
+컨테이너 기반 기술 
+
+1) chroot 실습 
+
+pwd (present working directory) : 사용자 현재 작업 디렉토리 확인 
+mkdir (make directory) : 디렉토리 생성 
+ls ( list ) : 디렉토리 목록 확인 
+
+# mkdir -p /root/newroot/{bin,lib,lib64}
+# ls 
+# apt install tree   (apt : advanced package tool,  패키지 설치 ) 
+# tree .
+# chroot  /root/newroot   /bin/bash 
+
+/   <------  /root/newroot
+/bin/bash <----  /root/newroot/bin/bash 
+
+# cp /bin/bash    /root/newroot/bin/bash
+# cp /bin/ls  /root/newroot/bin/ls
+# mkdir /root/newroot/lib/x86_64-linux-gnu
+
+# cp  /lib/x86_64-linux-gnu/libtinfo.so.5   /root/newroot/lib/x86_64-linux-gnu/libtinfo.so.5
+# cp /lib/x86_64-linux-gnu/libdl.so.2  /root/newroot/lib/x86_64-linux-gnu/libdl.so.2
+# cp /lib/x86_64-linux-gnu/libc.so.6  /root/newroot/lib/x86_64-linux-gnu/libc.so.6
+# cp /lib64/ld-linux-x86-64.so.2  /root/newroot/lib64/ld-linux-x86-64.so.2
+
+# cp /lib/x86_64-linux-gnu/libselinux.so.1  /root/newroot/lib/x86_64-linux-gnu/libselinux.so.1
+# cp /lib/x86_64-linux-gnu/libc.so.6  /root/newroot/lib/x86_64-linux-gnu/libc.so.6
+# cp /lib/x86_64-linux-gnu/libpcre.so.3 /root/newroot/lib/x86_64-linux-gnu/libpcre.so.3
+# cp /lib/x86_64-linux-gnu/libdl.so.2  /root/newroot/lib/x86_64-linux-gnu/libdl.so.2
+# cp /lib64/ld-linux-x86-64.so.2  /root/newroot/lib64/ld-linux-x86-64.so.2
+# cp /lib/x86_64-linux-gnu/libpthread.so.0  /root/newroot/lib/x86_64-linux-gnu/libpthread.so.0
+
+
+# tree .
+.
+├── docker_lab.tgz
+├── k8s_lab.tgz
+└── newroot
+    ├── bin
+    │   ├── bash
+    │   └── ls
+    ├── lib
+    │   └── x86_64-linux-gnu
+    │       ├── libc.so.6
+    │       ├── libdl.so.2
+    │       ├── libpcre.so.3
+    │       ├── libpthread.so.0
+    │       ├── libselinux.so.1
+    │       └── libtinfo.so.5
+    └── lib64
+        └── ld-linux-x86-64.so.2
+
+5 directories, 11 files
+
+
+# chroot  /root/newroot   /bin/bash 
+
+
+
+
+su ( switch user ) : 사용자 전환/변경 
+bash (shell) : 사용자에게 명령어 입력 프롬프트 출력 입력 
+
+
+
+
+
+
+
+
+
+# ip netns del guestnet
+
+
+
+
+
+
+Cgroups 실습 
+----------------------------------
+# cd 
+# tar -zxvf docker_lab.tgz
+term 2 # top   ( CPU많이 사용하는 순으로 프로세스를 정렬 출력)
+
+
+term 1#  cd docker_lab
+term 1#  ./a.out & 
+term 1#  ./b.out & 
+term 1# cd /sys/fs/cgroup/cpu
+term 1# mkdir limit_50_percent 
+term 1# cd limit_50_percent 
+term 1# echo 3661 > tasks
+
+	 term1 # echo $(pgrep a.out) > tasks
+term 1# cat tasks 
+term 1# echo 512 > cpu.shares
+
+
+자원의 경쟁(경합) 가중치 
+a.out   b.out 
+1024  1024 
+1 (50%)    :     1  (50%)
+
+a.out       b.out (***)
+512        1024
+1   (33%)  :       2 (66%)
+
+a.out       b.out (***)
+256      1024
+1 (20%)   :      4 (80%)
+
+
+term 1# pkill b.out 
+term 1# pkill a.out 
+
+
+
+
+
+------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+Overlay 실습 
+====================
+# cd    (사용자 계정의 홈 디렉토리로 이동) 
+
+# mkdir overlayfs
+# cd overlayfs
+# mkdir container image1 image2 image3 work merge
+
+# echo Hello, world > image1/a
+# echo Hello, docker > image1/b
+# echo Hello, yumi > image2/c
+
+#  mount -t overlay  overlay -o lowerdir=image2:image1,upperdir=container,workdir=work    merge
+
+# tree .
+.
+├── container
+├── image1
+│   ├── a
+│   └── b
+├── image2
+│   └── c
+├── image3
+├── merge
+│   ├── a
+│   ├── b
+│   └── c
+
+# cat merge/a
+Hello, world
+#
+# cat merge/b
+Hello, docker
+#
+# cat merge/c
+Hello, yumi
+
+# echo Good bye > merge/a
+# cat merge/a
+Good by
+
+# echo Good night > merge/d
+# rm merge/b
+# tree .
+.
+├── container
+│   ├── a
+│   ├── b
+│   └── d
+├── image1
+│   ├── a
+│   └── b
+├── image2
+│   └── c
+├── image3
+├── merge
+│   ├── a
+│   ├── c
+│   └── d
+└── work
+    └── work
+
+
+
+
+
+
+
+
+
+
