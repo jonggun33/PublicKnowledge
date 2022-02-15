@@ -207,46 +207,47 @@ docker container inspect test01 | grep -C2 UpperDir
 
 ==== Networking
 [source, bash]
-======================
 docker container run -d --name web1 -p 8080:80 nginx
 docker container run -d --name web2 -p 8181:80 nginx
 
+[source, bash]
 docker container inspect web1 | grep IPAddr
                   "IPAddress": "172.17.0.2",
-
 docker container inspect web2 | grep IPAddr
                   "IPAddress": "172.17.0.3",
 
+[source, bash]
 echo "This is web1 server" > index.html
 docker container cp index.html  web1:/usr/share/nginx/html/index.html
 
+[source, bash]
 echo "This is web2 server" > index.html
 docker container cp index.html web2:/usr/share/nginx/html/index.html
 
+[source, bash]
 curl -sf http://172.17.0.2
 This is web1 server
 This is web2 server
 
+[source, bash]
 web browser 
 http://192.168.137.101:8080
 http://192.168.137.101:8080
 
+[source, bash]
 docker network ls
 NETWORK ID     NAME      DRIVER    SCOPE
 5db7f0b30b02   bridge    bridge    local
 515d21ee2b86   host      host      local
 fc133b3066a6   none      null      local
 
+[source, bash]
 docker network inspect bridge
 
+[source, bash]
 docker container run -it --name host00 --net host centos
 docker container run -it --name none00 --net none centos
-======================
 
 == Useful Unix Commands
 [source, bash]
 watch -n 1 docker container ps -a
-
-
-
-
