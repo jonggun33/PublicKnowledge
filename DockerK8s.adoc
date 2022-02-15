@@ -1,4 +1,6 @@
 = Cloud Native
+:sectnums:
+:toc: left
 
 유 미 (takytaky@empas.com)
 
