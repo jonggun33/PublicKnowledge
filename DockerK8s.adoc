@@ -374,6 +374,7 @@ docker rm -f $(docker ps -aq)
 poweroff
 
 ==== Fixed IP
+[source, bash]
 hostnamctl set-hostname  worker1
 hostname 
 cd /etc/netplan
