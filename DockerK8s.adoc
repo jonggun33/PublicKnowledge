@@ -71,6 +71,9 @@ su ( switch user ) : 사용자 전환/변경
 bash (shell) : 사용자에게 명령어 입력 프롬프트 출력 입력 
  ip netns del guestnet
 
+=== Namespaces
+
+
 === Cgroups 실습 
 
 [source, bash]
@@ -207,6 +210,9 @@ alias conrm='docker container rm -f $(docker container ps -aq)'
 docker container run -it --name test01  centos
 docker container inspect test01 | grep -C2 UpperDir
 
+==== Volume
+
+
 ==== Networking
 [source, bash]
 docker container run -d --name web1 -p 8080:80 nginx
@@ -249,6 +255,131 @@ docker network inspect bridge
 [source, bash]
 docker container run -it --name host00 --net host centos
 docker container run -it --name none00 --net none centos
+
+=== Image Management
+==== Push
+[source, bash]
+docker login
+docker image tag busybox jonggun/busyimage:1.0 
+docker image push jonggun/busyimage:1.0 
+docker image rm jonggun/busyimage:1.0 
+docker logout
+
+==== Creating images from containers
+[source, bash]
+docker rm -f $(docker ps -aq)
+echo Hello, World > index.html
+docker run -it --name sample ubuntu
+touch /data.out
+ctrl+PQ
+docker container cp index.html sample:/usr/share/nginx/index.html
+docker container commit -a "Comment" -m "message" sample jonggun/web00:1.0
+docker run -it --name test jonggun/web00:1.0
+
+==== Creating Images from script
+[source, bash]
+ cd 
+ tar -zxvf docker_lab.tgz 
+ cd docker_lab/dockerfile_dir 
+ pwd
+/root/docker_lab/dockerfile_dir
+ cat Dockerfile.1 
+FROM ubuntu
+RUN  apt-get update && apt-get install -y -q nginx
+COPY index.html /var/www/html/
+CMD ["nginx", "-g", "daemon off; " ]
+docker build -t web00:1.0 -f Dockerfile.1  .
+docker image ls
+
+[source, bash]
+nano Dockerfile.1
+FROM ubuntu
+RUN  apt-get update && apt-get install -y -q nginx && rm -rf  /var/lib/apt/lists/*
+COPY index.html /var/www/html/
+CMD ["nginx", "-g", "daemon off; " ]
+
+[source, bash]
+docker build -t web00:2.0 -f Dockerfile.1  .
+docker image ls 
+docker image inspect centos 
+
+[source, bash]
+nano Dockerfile.7 
+ FROM centos:7
+ ENV myName “Yu Mi”
+ ENV myOrder Pizza Pasta Salad
+ ENV myNumber 1004
+docker build -t env00 -f Dockerfile.7 .     
+docker run -it env00
+	[root@e251996adf58 /]# env
+[source, bash]
+nano Dockerfile.10
+FROM centos:7
+LABEL maintainer "Yu Mi <yumi@example.com>"
+LABEL title "TEST Image"
+LABEL version 1.0
+LABEL description "This image is test image ^__^"
+
+[source, bash]
+docker build -t label00 -f Dockerfile.10  .
+docker image inspect label00
+
+[source, bash]
+cat Dockerfile.11
+FROM nginx
+EXPOSE 443
+docker build -t port00 -f Dockerfile.11 .
+docker run -d -p 8080:443 port00
+docker ps -a
+
+[source, bash]
+cat Dockerfile.13
+FROM ubuntu
+ADD host.html  /first_dir/
+ADD host.html  /first_dir/secondfile
+ADD https://github.com/kubernetes/kubernetes/blob/master/LICENSE /first_dir/
+ADD webdata.tar /first_dir/
+docker build -t add00 -f Dockerfile.13 .
+docker run -it add00 
+
+[source, bash]
+cat Dockerfile.15
+FROM ubuntu
+VOLUME /container
+docker build -t volume00 -f Dockerfile.15 .
+docker run -it volume00
+docker ps -a
+docker container inspect admiring_black
+        "Mounts": [
+            {
+                "Type": "volume",
+                "Name": "7a03c4dacae697515069000c969e426e68013c0a782d9e0f6c3ab10a12682016",
+                "Source": "/var/lib/docker/volumes/7a03c4dacae697515069000c969e426e68013c0a782d9e0f6c3ab10a12682016/_data",
+                "Destination": "/container",
+                "Driver": "local",
+
+== Kubernetes
+=== Installation
+==== Check & Set Environment
+[source, bash]
+free  : 메모리(RAM)  사이즈 확인 
+cat /proc/cpuinfo : cpu core 수 확인 
+hostnamectl set-hostname  master
+hostname
+nano  /etc/hosts 
+	192.168.137.101     master 
+	192.168.137.102     worker1 
+	192.168.137.103	worker2
+docker rm -f $(docker ps -aq)
+poweroff
+
+==== Fixed IP
+hostnamctl set-hostname  worker1
+hostname 
+cd /etc/netplan
+nano 00-installer-config.yaml
+	192.168.137.101  ---> 192.168.137.102
+ netplan apply 
 
 == Useful Unix Commands
 [source, bash]
