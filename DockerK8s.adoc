@@ -407,7 +407,7 @@ kubeadm reset
 kubectl get nodes 
  192.168.137.101:6443
 
-==== kubectl 자동 완성 기능 설정 
+=== kubectl 자동 완성 기능 설정 
 [source, bash]
 echo "source <(kubectl completion bash)" >> ~/.bashrc
 tail -1 ~/.bashrc
@@ -417,7 +417,7 @@ root@192.168.
 kubernetes-admin@kubernetes
                              클러스터계정@(클러스터 이름)
 
-==== Running 
+=== Running 
 [source, bash]
 watch -n 1 kubectl get pods -o wide
 cd ~/k8s_lab/pod
@@ -425,7 +425,7 @@ kubectl apply -f app.yaml
 kubectl delete pod app
 kubectl delete -f app.yaml
 
-==== cpu 자원 할당 실습 
+=== cpu 자원 할당 실습 
 NOTE:  /root/k8s_lab/pod/pod-resources
 
 [source, bash]
@@ -443,7 +443,7 @@ kubectl delete pod cpu-demo-2 -n cpu-example
 kubectl delete ns cpu-example
 kubectl get ns
 
-==== memory 자원 할당 실습 
+=== memory 자원 할당 실습 
 [source, bash]
 cat memory-request-limit.yaml
 terminal 2 #  watch -n 1 kubectl get pods -n mem-example -o wide
@@ -454,7 +454,7 @@ kubectl apply -f  memory-request-limit-2.yaml
 kubectl delete pod -n mem-example --all
 kubectl delete ns mem-example 
 
-==== initContainer 실습
+=== initContainer 실습
 NOTE: /root/k8s_lab/pod
 
 [source, bash]
@@ -468,7 +468,7 @@ kubectl delete pod init-demo
 kubectl apply -f init-containers.yaml 
 curl -sf http://172.16.189.68
 
-==== 스태틱 파드 실습 (85)
+=== 스태틱 파드 실습 (85)
 실습은 worker1 에서 진행 
 
 [source, bash]
@@ -483,7 +483,7 @@ systemctl restart kubelet
 rm /etc/static.d/app.yaml
 systemctl restart kubelet
 
-==== 레이블 & 셀렉터 실습 
+=== 레이블 & 셀렉터 실습 
 [source, bash]
 cat deploy-label01.yaml
  template:
@@ -502,7 +502,7 @@ label-app04-5cfd679cbc-z42bz       app=nodejs,environment=production,release=sta
 kubectl delete deploy --all
 kubectl delete pod --all
 
-==== 노드셀렉터(87)
+=== 노드셀렉터(87)
 [source, bash]
 kubectl get nodes --show-labels
 kubectl label nodes worker1 disk=ssd
@@ -514,14 +514,14 @@ kubectl apply -f nodeselector.yaml
 kubectl label nodes worker1 disk-
 kubectl get nodes --show-labels
 
-==== 애노테이션 실습 
+=== 애노테이션 실습 
 [source, bash]
 kubectl apply -f annotation.yaml
 kubectl describe deploy annotation-nodejs
 kubectl delete deploy --all
 kubectl delete pod --all
 
-==== load balancing
+=== load balancing
 LoadBalancer Type의 서비스 구성하기
 [source, bash]
 59.29.225.193
@@ -559,7 +559,7 @@ vi  loadbalancer.yaml
 		targetPort: 80
 kubectl apply -f loadbalancer.yaml 
 
-==== 레플리케이션 컨트롤러 vs 레플리카셋 
+=== 레플리케이션 컨트롤러 vs 레플리카셋 
 * 지정한 후의 복제본 파드가 지속적으로 실행 유지 
 
 * 레플리케이션 컨트롤러(x)
@@ -581,7 +581,7 @@ kubectl scale rs rs-nginx --replicas=5
 kubectl scale rs rs-nginx --replicas=3
 kubectl delete rs rs-nginx
 
-==== 디플로이먼트 실습 
+=== 디플로이먼트 실습 
 [source, bash]
 실습 디렉토리 
 /root/k8s_lab/controller/deployment
@@ -595,7 +595,7 @@ kubectl apply -f deploy-nginx.yaml
 kubectl scale deploy deploy-nginx --replicas=5
 kubectl scale deploy deploy-nginx --replicas=3
 
-==== deployment rollout 실습
+=== deployment rollout 실습
 . kubectl set image deploy deploy-nginx deploy-nginx=nginx:1.16.0
 . 기본 문서 편집기 nano 수정 
 [source, bash]
@@ -603,7 +603,7 @@ export EDITOR=/bin/nano
 kubectl edit deploy deploy-nginx
 kubectl apply -f deploy-nginx.yaml
 
-==== deployment undo 실습 (17 --> 16 --> 18 --> 19) 
+=== deployment undo 실습 (17 --> 16 --> 18 --> 19) 
 [source, bash]
  kubectl rollout history deploy deploy-nginx
  kubectl rollout history deploy deploy-nginx --revision=2
@@ -616,7 +616,7 @@ kubectl apply -f deploy-nginx.yaml
  kubectl describe node master
 kubectl delete deploy deploy-nginx
 
-==== 데몬셋 실습 
+=== 데몬셋 실습 
 [source, bash]
 /root/k8s_lab/controller/daemonset
 terminal 2 # watch -n 1 kubectl get daemonset,rs,pods -o wide
@@ -629,7 +629,7 @@ kubectl apply -f daemonset-app.yaml
 kubectl delete pod daemonset-app-sb8db
 kubectl delete daemonset daemonset-app
 
-==== clusterip 서비스 실습 
+=== clusterip 서비스 실습 
 [source, bash]
 /root/k8s_lab/service
 cat hostname-server.yaml
@@ -664,7 +664,7 @@ curl -sf http://10.98.68.96 | grep Hello
 # curl -sf http://10.98.68.96 | grep Hello
         <p>Hello,  hostname-server-7c85cc96dc-rrtfb</p> </blockquote>
 
-==== 블루 그린 배포 
+=== 블루 그린 배포 
 [source, bash]
 cd deploy_blue_green/
 cat deploy-blue.yaml 
@@ -689,7 +689,7 @@ kubectl delete svc blue-green-svc
 kubectl delete deploy deploy-green
 kubectl delete deploy deploy-blue 
 
-==== 카나리 배포 
+=== 카나리 배포 
 [source, bash]
 pwd
 /root/k8s_lab/controller/deployment/deploy_canary
@@ -716,7 +716,7 @@ curl -sf http://192.168.137.101:30880 | grep Deploy
 kubectl delete deploy --all 
 kubectl delete svc blue-canary-svc 
 
-==== hostpath 실습 
+=== hostpath 실습 
 [source, bash]
 /root/k8s_lab/volume
 kubectl apply -f hostpath.yaml
@@ -727,7 +727,7 @@ kubectl exec -it hostpath-pod -- /bin/bash
 worker1 (pod가 실행된 워커 노드에서 실행 ) # ls /mnt
 app.js
 
-==== pv와 pvc 실습 
+=== pv와 pvc 실습 
 [source, bash]
 /root/k8s_lab/volume
 terminal 2 # watch -n 1 kubectl get pv,pvc,pods -o wide
