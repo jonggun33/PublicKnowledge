@@ -444,6 +444,7 @@ kubectl delete ns cpu-example
 kubectl get ns
 
 ==== memory 자원 할당 실습 
+[source, bash]
 cat memory-request-limit.yaml
 terminal 2 #  watch -n 1 kubectl get pods -n mem-example -o wide
 kubectl create namespace mem-example 
@@ -520,6 +521,244 @@ kubectl describe deploy annotation-nodejs
 kubectl delete deploy --all
 kubectl delete pod --all
 
+==== load balancing
+LoadBalancer Type의 서비스 구성하기
+[source, bash]
+59.29.225.193
+http://59.29.224.86   <---
+kubectl create namespace metallb-system 
+kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.3/manifests/metallb.yaml
+kubectl get pods -n metallb-system
+vi metallb_test.yaml
+	apiVersion: v1
+	kind: ConfigMap
+	metadata:
+	namespace: metallb-system
+	name: config
+	data:
+	config: |
+		address-pools:
+		- name: my-ip
+		protocol: layer2
+		addresses:
+		- 10.0.2.200-10.0.2.209
+kubectl apply -f metallb_test.yaml
+kubectl delete svc nodeport-hostname-service
+vi  loadbalancer.yaml
+	apiVersion: v1
+	kind: Service
+	metadata:
+	name: loadbalancer-hostname-service
+	spec:
+	type: LoadBalancer
+	selector:
+		app: hostname-server          <---- 수정 
+	ports:
+	- protocol: TCP
+		port: 80              <--- 수정 
+		targetPort: 80
+kubectl apply -f loadbalancer.yaml 
+
+==== 레플리케이션 컨트롤러 vs 레플리카셋 
+* 지정한 후의 복제본 파드가 지속적으로 실행 유지 
+
+* 레플리케이션 컨트롤러(x)
+** 롤링 업데이트 지원 
+** 등호기반 셀렉터 
+* 레플리카셋 (+디플로이먼트)
+** 등호기반 셀렉터 + 집합 기반 셀렉터 (유연한 선택)
+** 롤링 업데이트 지원안함 ---> 디플로이먼트
+
+[source, bash]
+실습 디렉토리 
+cd ~/k8s_lab/controller/replicaset/
+cat rs-nginx.yaml 
+terminal 2 # # watch -n 1 kubectl get rs,pods -o wide
+kubectl apply -f rs-nginx.yaml
+kubectl get pods --show-labels
+kubectl delete pod rs-nginx-stv2q
+kubectl scale rs rs-nginx --replicas=5
+kubectl scale rs rs-nginx --replicas=3
+kubectl delete rs rs-nginx
+
+==== 디플로이먼트 실습 
+[source, bash]
+실습 디렉토리 
+/root/k8s_lab/controller/deployment
+Deployment
+	--> Replicaset (replicas, selector, template)
+		--> pod 
+			--> containers
+cat deploy-nginx.yaml
+terminal 2 # watch -n 1 kubectl get deploy,rs,pods -o wide
+kubectl apply -f deploy-nginx.yaml
+kubectl scale deploy deploy-nginx --replicas=5
+kubectl scale deploy deploy-nginx --replicas=3
+
+==== deployment rollout 실습
+. kubectl set image deploy deploy-nginx deploy-nginx=nginx:1.16.0
+. 기본 문서 편집기 nano 수정 
+[source, bash]
+export EDITOR=/bin/nano 
+kubectl edit deploy deploy-nginx
+kubectl apply -f deploy-nginx.yaml
+
+==== deployment undo 실습 (17 --> 16 --> 18 --> 19) 
+[source, bash]
+ kubectl rollout history deploy deploy-nginx
+ kubectl rollout history deploy deploy-nginx --revision=2
+ kubectl rollout undo deploy deploy-nginx
+ kubectl rollout history deploy deploy-nginx --revision=2
+ kubectl rollout undo deploy deploy-nginx --to-revision=2
+ kubectl delete rs deploy-nginx-5c5dc7b4f8
+ kubectl delete rs deploy-nginx-6f69f97599
+ kubectl rollout history deploy deploy-nginx
+ kubectl describe node master
+kubectl delete deploy deploy-nginx
+
+==== 데몬셋 실습 
+[source, bash]
+/root/k8s_lab/controller/daemonset
+terminal 2 # watch -n 1 kubectl get daemonset,rs,pods -o wide
+kubectl apply -f daemonset-app.yaml
+nano daemonset-app.yaml 
+kubectl apply -f daemonset-app.yaml
+kubectl get daemonset daemonset-app -o yaml 
+nano daemonset-app.yaml 
+kubectl apply -f daemonset-app.yaml
+kubectl delete pod daemonset-app-sb8db
+kubectl delete daemonset daemonset-app
+
+==== clusterip 서비스 실습 
+[source, bash]
+/root/k8s_lab/service
+cat hostname-server.yaml
+kubectl apply -f hostname-server.yaml
+terminal 2# watch -n 1 kubectl get svc,deploy,pods -o wide
+nano clusterip-hostname.yaml 
+kubectl apply -f clusterip-hostname.yaml
+curl -sf http://10.98.68.96 | grep Hello
+curl -sf http://10.98.68.96 | grep Hello
+        <p>Hello,  hostname-server-7c85cc96dc-kq82z</p> </blockquote>
+curl -sf http://10.98.68.96 | grep Hello
+curl -sf http://10.98.68.96 | grep Hello
+        <p>Hello,  hostname-server-7c85cc96dc-pww22</p> </blockquote>
+kubectl delete pod hostname-server-7c85cc96dc-pww22
+curl -sf http://10.98.68.96 | grep Hello
+        <p>Hello,  hostname-server-7c85cc96dc-rrtfb</p> </blockquote>
+curl -sf http://10.98.68.96 | grep Hello
+        <p>Hello,  hostname-server-7c85cc96dc-kq82z</p> </blockquote>
+curl -sf http://10.98.68.96 | grep Hello
+    <p>Hello,  hostname-server-7c85cc96dc-pww22</p> </blockquote>
+kubectl delete pod hostname-server-7c85cc96dc-pww22
+curl -sf http://10.98.68.96 | grep Hello
+        <p>Hello,  hostname-server-7c85cc96dc-rrtfb</p> </blockquote>
+# curl -sf http://10.98.68.96 | grep Hello
+        <p>Hello,  hostname-server-7c85cc96dc-kq82z</p> </blockquote>
+iptables -t nat -S | grep hostname-service
+kubectl scale deploy hostname-server --replicas=3
+curl -sf http://10.98.68.96 | grep Hello
+        <p>Hello,  hostname-server-7c85cc96dc-kq82z</p> </blockquote>
+# curl -sf http://10.98.68.96 | grep Hello
+        <p>Hello,  hostname-server-7c85cc96dc-rb8tf</p> </blockquote>
+# curl -sf http://10.98.68.96 | grep Hello
+        <p>Hello,  hostname-server-7c85cc96dc-rrtfb</p> </blockquote>
+
+==== 블루 그린 배포 
+[source, bash]
+cd deploy_blue_green/
+cat deploy-blue.yaml 
+kubectl apply -f deploy-blue.yaml
+blue 
+        app: deploy-blue
+        release: stable
+cat blue-green-svc.yaml
+kubectl apply -f blue-green-svc.yaml
+http://192.168.137.101:30880 
+cat deploy-green.yaml
+green 
+       app: deploy-green
+        release: stable
+nano blue-green-svc.yaml
+  selector:
+    app: deploy-blue 
+		--> green
+kubectl apply -f blue-green-svc.yaml
+kubectl delete deploy deploy-blue
+kubectl delete svc blue-green-svc
+kubectl delete deploy deploy-green
+kubectl delete deploy deploy-blue 
+
+==== 카나리 배포 
+[source, bash]
+pwd
+/root/k8s_lab/controller/deployment/deploy_canary
+kubectl apply -f deploy-blue.yaml
+blue 
+	app=webapp,release=stable
+kubectl apply -f deploy-canary.yaml
+canary 
+	 app=webapp,release=beta
+kubectl apply -f blue-canary-svc.yaml
+curl -sf http://192.168.137.101:30880 | grep Deploy
+        <p> This is BLUE Deployment. </p>
+curl -sf http://192.168.137.101:30880 | grep Deploy
+        <p> This is Canary Deployment. </p>
+nano blue-canary-svc.yaml  
+selector:
+    app: webapp
+	--> release: beta
+kubectl apply -f blue-canary-svc.yaml
+curl -sf http://192.168.137.101:30880 | grep Deploy
+        <p> This is Canary Deployment. </p>
+curl -sf http://192.168.137.101:30880 | grep Deploy
+        <p> This is Canary Deployment. </p>
+kubectl delete deploy --all 
+kubectl delete svc blue-canary-svc 
+
+==== hostpath 실습 
+[source, bash]
+/root/k8s_lab/volume
+kubectl apply -f hostpath.yaml
+kubectl exec -it hostpath-pod -- /bin/bash
+	root@hostpath-pod:/# cp /app.js    /poddir
+	root@hostpath-pod:/# ls /poddir
+	app.js
+worker1 (pod가 실행된 워커 노드에서 실행 ) # ls /mnt
+app.js
+
+==== pv와 pvc 실습 
+[source, bash]
+/root/k8s_lab/volume
+terminal 2 # watch -n 1 kubectl get pv,pvc,pods -o wide
+cat pv.yaml 
+kubectl apply -f pv.yaml
+cat pvc.yaml
+kubectl apply -f pvc.yaml
+cat deploy-pvc.yaml
+kubectl apply -f deploy-pvc.yaml
+kubectl exec -it volume-pod-58dfbd6667-fbzsf -- /bin/bash
+	root@volume-pod-58dfbd6667-fbzsf:/# ls /tmp
+	app.log
+worker2 (pod 가 스케쥴된 워커노드에서 실행) 
+  tail -f /mnt/k8s-pv/app.log
+pod (/tmp)
+	worker2 (/mnt/k8s-pv )
+
+.반환정책 
+[source, bash]
+kubectl delete deploy volume-pod
+kubectl delete pvc pvc
+kubectl apply -f pvc.yaml
+
+.pv초기화 
+[source, bash]
+kubectl delete pv pv
+kubectl apply -f pv.yaml
+kubectl cordon worker1 
+kubectl get node
+kubectl uncordon worker2
+kubectl get node
 
 == Useful Unix Commands
 [source, bash]
@@ -527,6 +766,10 @@ watch -n 1 docker container ps -a
 
 [source, bash]
 tar -zxvf k8s_lab.tgz
+
+[source, bash]
+scp root@192.168.137.101:/root/docker_lab.tgz   .
+scp root@192.168.137.101:/root/k8s_lab.tgz   .
 
 === Fixed IP
 [source, bash]
