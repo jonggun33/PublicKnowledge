@@ -1,0 +1,46 @@
+= Grammar Comparison of C++, Python, Javascript
+
+== Variable Definition
+
+=== Time & Date
+
+== Pointer & References
+
+== String
+
+== Array
+
+== Iterator
+
+== Data Structure
+
+== Loopingn
+
+== Sorting
+
+== Searching
+
+== Regular Expression
+
+== File Handling
+
+== Threading
+
+== Function
+=== Closure
+
+
+== Class
+
+
+
+== Decorator
+
+== Asynchronous
+
+== Module/Package
+
+== Exception
+
+== Testing
+
