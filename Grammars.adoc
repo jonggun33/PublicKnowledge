@@ -1,6 +1,18 @@
 = Grammar Comparison of C++, Python, Javascript
+:sectnums:
+:toc: left
 
 == Variable Definition
+[source, c++]
+int a = 0;
+char b = 'b';
+
+[source, python]
+int a = 0
+char b = 'b'
+
+[source, javascript]
+let a = 0
 
 === Time & Date
 
