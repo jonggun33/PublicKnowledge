@@ -1,0 +1,22 @@
+= English Grammar Essentials
+
+English grammar is about 
+. Transformation
+. Synchronization
+
+
+== Transformation
+Is transforming simple sentences into various types of sentence such as:
+* Negation
+* Question
+* Past/Future
+* Passive
+* Exclamation
+* Imperative
+
+== Syncrhonization
+Is ensuring each element of a sentence is correctly modified in accordance with others':
+* Plurallity
+* Person View
+* Gender
+* Marks
