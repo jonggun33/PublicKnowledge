@@ -1,4 +1,5 @@
 = English Grammar Essentials
+:sectnums:
 
 English gammar is, in essence, all about correctly transforming simple form of sentences and making sure components of sentences are synchronized in the process.
 The transformation occurs when you want to make the simple sentence to be:
@@ -30,7 +31,7 @@ Let's start a two simple sentences each describing a state and a action:
 ----
 
 === Negation
-_The univers is not wide compared to the multiverse._
+_The univers is not wide compared to the multiverse._ +
 _I don't observe the universe any more._
 
 === Question
@@ -38,7 +39,6 @@ _Is the universe wide?_ +
 _How wide is the universe?_ +
 _Since when was the universe wide?_ +
 _Do you observe the universe?_
-_
 
 === Tensed
 _The universe was wide._ +
