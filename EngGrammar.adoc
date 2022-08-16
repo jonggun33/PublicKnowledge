@@ -1,7 +1,7 @@
 = English Grammar Essentials
 :sectnums:
 
-English gammar is, in essence, all about correctly transforming simple form of sentences and making sure components of sentences are synchronized in the process.
+English gammar is, in essence, all about correctly transforming simple sentences into more complex ones and making sure components of sentences stay synchronized in the process.
 The transformation occurs when you want to make the simple sentence to be:
 
     * Negated
