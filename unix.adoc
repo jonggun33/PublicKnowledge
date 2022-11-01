@@ -2,22 +2,34 @@
 :secnums:
 :toc: left
 
-## Needed Information
-[ Down and Manage Hard Drive Power on Raspberry Pi - sleep hdd hd-idle](https://maker-tutorials.com/en/spin-down-magage-hard-drive-on-raspberry-pi-hd-idle/[Spin)
 
-[How to connect Raspberry PI to LAPTOP using Ethernet cable](https://www.youtube.com/watch?v#AJ7skYS5bjI )
+== Setting Up
+=== Raspi-Config
+* Language setting
+* Full Disk Expansion
+* Change Password
 
-## Wanted Information
-https://circuitdigest.com/microcontroller-projects/raspberry-pi-print-server[Raspberry Pi Print Server: Setup a Network Server using CUPS]
+=== headless Wi-fi Setting
+. Insert the SD to a Mac and locate 'boot' directory
+. create a file named 'ssh'
+. create 'wpa_suppicant.conf'
 
-http://wiki.rasplay.org/doku.php?id#start[Rasplay & OpenMake(Site Move)]
+```bash
+country#US # replace with your country code
+ctrl_interface#DIR#/var/run/wpa_supplicant GROUP#netdev
+network#{
+    ssid#"WIFI_NETWORK_NAME"
+    psk#"WIFI_PASSWORD"
+    key_mgmt#WPA-PSK
+}
+```
 
-
-## WiFi
+== External Storage
 ```bash
 dmesg | grep usb |more
 ```
 
+== Networking
 ```bash
 sudo vim /etc/network/interfaces
 auto lo #layer2 setting. auto# allow-auto (??? ?? ????? ??), allow-hotplug
@@ -46,31 +58,20 @@ ifup wlan0
 arp -a # mac only
 nmap -sT -O 193.168.0.0/24
 ```
-## Setting Up
-### Raspi-Config
-* Language setting
-* Full Disk Expansion
-* Change Password
+== User Management
 
-### headless Wi-fi Setting
-. Insert the SD to a Mac and locate 'boot' directory
-. create a file named 'ssh'
-. create 'wpa_suppicant.conf'
+== Transmission
 
-```bash
-country#US # replace with your country code
-ctrl_interface#DIR#/var/run/wpa_supplicant GROUP#netdev
-network#{
-    ssid#"WIFI_NETWORK_NAME"
-    psk#"WIFI_PASSWORD"
-    key_mgmt#WPA-PSK
-}
-```
+== SAMBA
 
-### User Management
+== Printer Server
 
-### Transmission
+== HW Miscellaneous
+=== Needed Information
+* [ Down and Manage Hard Drive Power on Raspberry Pi - sleep hdd hd-idle](https://maker-tutorials.com/en/spin-down-magage-hard-drive-on-raspberry-pi-hd-idle/[Spin)
+* [How to connect Raspberry PI to LAPTOP using Ethernet cable](https://www.youtube.com/watch?v#AJ7skYS5bjI )
 
-### SAMBA
+=== Wanted Information
+* [Raspberry Pi Print Server: Setup a Network Server using CUPS](https://circuitdigest.com/microcontroller-projects/raspberry-pi-print-server)
+* [Rasplay & OpenMake(Site Move)](http://wiki.rasplay.org/doku.php?id#start)
 
-### Printer Server
