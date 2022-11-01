@@ -14,7 +14,7 @@
 . create a file named 'ssh'
 . create 'wpa_suppicant.conf'
 
-```bash
+[source,bash]
 country#US # replace with your country code
 ctrl_interface#DIR#/var/run/wpa_supplicant GROUP#netdev
 network#{
@@ -22,42 +22,38 @@ network#{
     psk#"WIFI_PASSWORD"
     key_mgmt#WPA-PSK
 }
-```
 
 == External Storage
-```bash
+[source,bash]
 dmesg | grep usb |more
-```
 
 == Networking
-```bash
+[source,bash]
 sudo vim /etc/network/interfaces
 auto lo #layer2 setting. auto# allow-auto (??? ?? ????? ??), allow-hotplug
 iface lo net loopback. #layer3: iface (stanza ??), inet (IP protocol)
-
 iface eth0 inet manual
-
 auto wlan0
 allow-hotplug wlan0
 iface wlan0 inet manual
 wpa-roam /etc/wpa_suppicant/wpa_supplicant.conf
-```
+
 
 https://unix.stackexchange.com/questions/128439/good-detailed-explanation-of-etc-network-interfaces-syntax[Good detailed explanation of /etc/network/interfaces syntax?]
 
 https://www.electronicshub.org/setup-wifi-raspberry-pi-2-using-usb-dongle/[How to setup WiFi on Raspberry Pi 2 using USB Dongle]
 
-```bash
+[source,bash]
 ifconfig
 iwconfig
 sudo iwlist wlan0 scan
 ifup wlan0
-```
 
-```bash
+
+[source,bash]
 arp -a # mac only
 nmap -sT -O 193.168.0.0/24
-```
+
 == User Management
 
 == Transmission
@@ -75,3 +71,4 @@ nmap -sT -O 193.168.0.0/24
 * [Raspberry Pi Print Server: Setup a Network Server using CUPS](https://circuitdigest.com/microcontroller-projects/raspberry-pi-print-server)
 * [Rasplay & OpenMake(Site Move)](http://wiki.rasplay.org/doku.php?id#start)
 
+== Bash/zsh
