@@ -1,4 +1,4 @@
-= GTD (Get Things Done) via Notion
+# GTD (Get Things Done) via Notion
 
 Around year 2019, I became very interested in the memo app, Notion, and converted my scattered writings into a heap of Notion pages. 
 
@@ -10,7 +10,7 @@ I decided to give it a try mainly after watching Khe Hy's hour-long introduction
 
 This is to share the essense of GTD that I coudl grasp from it.
 
-== What is GTD?
+## What is GTD?
 
 The GTD is a method for capturing to-do list and putting them in a system in which you are enforced to revisit them with certain frequency eventually letting you tick out the majority of them.
 
@@ -28,10 +28,10 @@ organize:: is assigning to-do item with attributes such as Deadline, Priority, C
 review:: The project should have the review frequency forcing you to review action items assigned to the project
 engage:: is process of performing the action items and reviewing the project status
 
-== Notion for GTD
+## Notion for GTD
 Two tables and two pages are minimum requirements for managing GTD based to-do in my opinion:
 
-=== Task Table
+### Task Table
 Requires following columns:
 
 Name:: 
@@ -41,7 +41,7 @@ HighProority::
 Context::
 Project:: is a 'Relation' type that specifies the project name from the Project Table
 
-=== Project Table
+### Project Table
 Requires following columns:
 
 Name:: of the project
@@ -50,8 +50,8 @@ Last Review::
 Next Review:: is automatically calculated from Review Frequency and Last Review
 Overdue:: is automatically determined by comparing the Next Review Data and today's date
 
-=== Capture Page
+### Capture Page
 Is a view of Task table with filter that shows only tasks that are not Done and not assigned to a project.
 
-=== Dashboard Page
+### Dashboard Page
 Shows proejects that are overdue its reviw

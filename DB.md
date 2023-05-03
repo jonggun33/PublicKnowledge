@@ -1,8 +1,6 @@
-= Database
-:toc: left
-:sectnums:
+# Database
 
-== Oracle SQL
+## Oracle SQL
 
 - [ ]  /*+PARALLeL(2)*/
 - [ ]  LEAD()

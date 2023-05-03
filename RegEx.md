@@ -1,6 +1,6 @@
-= Regular Expression... for beginning or refreshing ..
+# Regular Expression... for beginning or refreshing ..
 
-== What's there to know
+## What's there to know
 =======================
 * One letter pattern
 * Matching a word

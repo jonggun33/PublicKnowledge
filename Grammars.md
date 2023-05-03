@@ -1,58 +1,59 @@
-= Grammar Comparison of C++, Python, Javascript
-:sectnums:
-:toc: left
+# Grammar Comparison of C++, Python, Javascript
 
-== Variable Definition
-[source, c++]
+## Variable Definition
+```c++
 int a = 0;
 char b = 'b';
+```
 
-[source, python]
+```python
 int a = 0
 char b = 'b'
+```
 
-[source, javascript]
+```javascript
 let a = 0
+```
 
-=== Time & Date
+### Time & Date
 
-== Pointer & References
+## Pointer & References
 
-== String
+## String
 
-== Array
+## Array
 
-== Iterator
+## Iterator
 
-== Data Structure
+## Data Structure
 
-== Loopingn
+## Loopingn
 
-== Sorting
+## Sorting
 
-== Searching
+## Searching
 
-== Regular Expression
+## Regular Expression
 
-== File Handling
+## File Handling
 
-== Threading
+## Threading
 
-== Function
-=== Closure
-
-
-== Class
+## Function
+### Closure
 
 
+## Class
 
-== Decorator
 
-== Asynchronous
 
-== Module/Package
+## Decorator
 
-== Exception
+## Asynchronous
 
-== Testing
+## Module/Package
+
+## Exception
+
+## Testing
 

@@ -1,24 +1,25 @@
-= LaTex
+# LaTex
 :toc: left
 :sectnums:
 
-== Environment Setting
-=== Mac
+## Environment Setting
+### Mac
 . Installl Skim
 . For Skim Preference>Sync... 'Check for file Changes', 'Reload automatically'
 . Install MacTex (xelatex, latex)
 . Edit ~/.vimrc
 
-[source, bash]
+``` bash
 autocmd FileType tex nmap <buffer><C-T>: !xelatex %<CR>
 autocmd FileType tex nmap <buffer> T : !open -a Skim %:r.pdf<CR><CR>
+```
 
-https://tex.stackexchange.com/questions/353593/setting-up-a-latex-environment-for-vim[vim+latex on mac]
+[vim+latex on mac](https://tex.stackexchange.com/questions/353593/setting-up-a-latex-environment-for-vim)
 
-=== Windows
+### Windows
 
-== Document Structure
-[source, latex]
+## Document Structure
+``` latex
 \documentclass{article}
 \title{Cartesian closed categories and the price of eggs}
 \author{Jane Doe}
@@ -27,9 +28,10 @@ https://tex.stackexchange.com/questions/353593/setting-up-a-latex-environment-fo
    \maketitle
    Hello world!
 \end{document}
+```
 
-=== Skeleton for a Cheatsheet
-[source, latex]
+### Skeleton for a Cheatsheet
+``` latex
 \documentclass [a3paper]{article}
 \usepackage{milticol}
 \usepackage{blindtext}
@@ -69,7 +71,8 @@ abc & def \\
 \blindtext
 \end{multicols}
 \end{document}
+```
 
-== Mathematics
+## Mathematics
 
-== Drawing
+## Drawing

@@ -1,4 +1,4 @@
-= Web Technologies : Reminders and Trainers
+# Web Technologies : Reminders and Trainers
 Jonggun Gim <jonggun.gim@gmail.com>
 :description: This document is for amassing information about fundamental web technologies
 :author: Jonggun Gim
@@ -7,22 +7,22 @@ Jonggun Gim <jonggun.gim@gmail.com>
 :doctype: manpage
 :source-highlighter: highlight.js
 
-== About this document
+## About this document
 {description}
 
 .Revisions
 [format="csv", options="header"]
-|===
+|###
 Date, Description
 2020/12/02,Transplanted from Notion.
 2020/12/04, Drafted with a template.
 2020/12/04, Moved Angular GAE pages to this.
-|===
+|###
 
 
-== HTML5
+## HTML5
 .Basic HTML
-[source,html,%collapsible]
+```html,%collapsible
 ----
 <HTML></HTML>
 <head></head>
@@ -35,12 +35,12 @@ Date, Description
 <style></style>
 ----
 .Formatting
-[source,html]
+```html
 ----
 <del></del>
 ----
 .audio/video
-[source,html]
+```html
 ----
 <img src="a.jpg" width="300" height="200">
 <audio>
@@ -48,20 +48,20 @@ Date, Description
 <source>
 ----
 .Links
-[source,HTML]
+```HTML
 ----
  <a href="">이름 </a>
  <nav></nav>
 ----
 .Lists
-[source,HTML]
+```HTML
 ----
 <ul><ol><dl>
    <li></li>
 </ul></ol></dl>
 ----
 .Table
-[source,html]
+```html
 ----
 <table>
    <tr>
@@ -74,7 +74,7 @@ Date, Description
 ----
 
 .Form
-[source,html]
+```html
 ----
 <form>
    <label>name: </label> <input type="text"><br>
@@ -82,8 +82,8 @@ Date, Description
 </form>
 ----
 
-== CSS
-[source, html]
+## CSS
+``` html
 ----
 body{
 	background-color: lightblue;
@@ -96,7 +96,7 @@ h1{
 }
 ----
 
-[source, html]
+``` html
 ----
 <html>
     <head>
@@ -118,7 +118,7 @@ div : block을 수직으로 쌓는 구조, span: block을 수평으로 쌓는 �
 * id:  CSS selector # (sharp)
 * class: CSS selector . (dot)
 
-== JavaScript
+## JavaScript
 https://github.com/getify/You-Dont-Know-JS[getify/You-Dont-Know-JS]
 
 ```html
@@ -143,7 +143,7 @@ https://github.com/getify/You-Dont-Know-JS[getify/You-Dont-Know-JS]
 .let, var
 .alert, prompt
 .console.log
-[source,JavaScript]
+```JavaScript
 ----
 let theNumber = Number(prompt("Pick a number")); if (!Number.isNaN(theNumber)) {
 console.log("Your number is the square root of " + theNumber * theNumber);
@@ -153,7 +153,7 @@ console.log("Your number is the square root of " + theNumber * theNumber);
 .for
 .comments
 .function
-[source,JavaScript]
+```JavaScript
 ----
     const square1 = function(x) {
        return x * x;
@@ -167,7 +167,7 @@ console.log("Your number is the square root of " + theNumber * theNumber);
 ----
 
 .array
-[source,JavaScript]
+```JavaScript
 ----
 let sequence = [1, 2, 3]; sequence.push(4); sequence.push(5); console.log(sequence);
 // → [1, 2, 3, 4, 5]
@@ -176,16 +176,16 @@ for(let a of sequence){
 }
 ----    
 
-=== DOM (Document Object Model)
+### DOM (Document Object Model)
 .finding elements
-[source,JavaScript]
+```JavaScript
 ----
 let link = document.body.getElementsByTagName("a")[0]; console.log(link.href);
 document.getElementById("gertrude");
 ----
 
 .adding elements
-[source,JavaScript]
+```JavaScript
 ----
 <p>One</p>
 <p>Two</p>
@@ -208,7 +208,7 @@ image.parentNode.replaceChild(text, image); }
 ----
 
 .Handling Events
-[source,JavaScript]
+```JavaScript
 ----
 <button>Click me</button> <p>No handler here.</p> <script>
 let button = document.querySelector("button"); button.addEventListener("click", () => {
@@ -216,13 +216,13 @@ console.log("Button clicked."); });
 </script>
 ----
 
-== Angular
+## Angular
 https://www.javatpoint.com/angular-7-installation[Angular 7 Installation - Javatpoint]
 
 http://www.codaffection.com/angular-article/angular-7-crud-with-firestore/[Angular 7 CRUD with Firestore]
 
 .work flow
-[source,shell]
+```shell
 ----
 ng new [name]
 npm install firebase @angular/fire
@@ -237,8 +237,8 @@ ng g service shared/employee
 ng g class shared/employee --type=model
 ----
 
-== Vue
-=== Crash Course
+## Vue
+### Crash Course
 * Merge of MVC
 * Vue-cli 3
 * Npm install -g install @vue/cli
@@ -249,7 +249,7 @@ ng g class shared/employee --type=model
 * Index.html
 * Main.js
 * App.vue
-[source, html]
+``` html
 ----
 <template>
     <div id ="app>. Only one <div> allowed in the template
@@ -264,7 +264,7 @@ ng g class shared/employee --type=model
 ** <div v-bind="todos" v-for "todo in todos">
 * TodoItem.vue
 
-=== Key Points
+### Key Points
 * [x]  new Vue({el:, data: }); (500505)
 * [x]  v-if (500505)
 * [x]  {{}} (500505)
@@ -301,16 +301,16 @@ ng g class shared/employee --type=model
 * [ ]  Vuex (State Management)
 * [ ]  boot strapping with vue-cli
 
-=== Deployment
-==== To GitHub
+### Deployment
+#### To GitHub
 1. vue.config.js 
-[source, json]
+``` json
 module.exports = {
 	publicPath: '/reponame/'
 }
 
 1. on terminal
-[source, bash]
+``` bash
 git checkout --orphan gh-pages
 npm run build
 git --work-tree dist add -all
@@ -322,7 +322,7 @@ git branch -D gh-pages
 
 1. select 'gh-pages' from Setting>Github Pages
 
-=== Links
+### Links
 . https://vuejs.org/v2/guide/[Introduction - Vue.js]
 . https://riptutorial.com/Download/vue-js.pdf
 . https://codesandbox.io/embed/runtime-http-ebup4?codemirror=1[namecards]
@@ -337,16 +337,16 @@ git branch -D gh-pages
 
 
 
-== Firebase Hosting
+## Firebase Hosting
 https://firebase.google.com/?hl=ko[Firebase]
 
 https://medium.com/google-developers/whats-the-relationship-between-firebase-and-google-cloud-57e268a7ff6f[What's the relationship between Firebase and Google Cloud?]
 
-=== setting
+### setting
 https://console.firebase.google.com/project/inventoryg-218113/hosting[Sign in - Google Accounts]
 
 .Firebase CLI
-[source,shell]
+```shell
 ----
 brew update
 brew install node
@@ -354,7 +354,7 @@ npm install -g firebase-tools
 ----
 
 .Vue CLI/Firebase Project Init/Deploy
-[source,shell]
+```shell
 ----
 sudo npm install -g @vue/cli
 vue create [name]
@@ -368,12 +368,12 @@ IMPORTANT: node_modules 삭제한 다음 관리하고.. 다시 빌드할 경우�
 
 IMPORTANT: DropBox에서 node_modules를 계속 싱크하려면 시간이 너무 많이 걸리므로 DropBox 내에 git을 다른 폴더로 clone 한 다음에 이를 push 하면 될 것 같음.
 
-== Google AppEngine
+## Google AppEngine
 https://console.cloud.google.com/appengine?project=egtutor-hrd&serviceId=default&duration=PT1H[Google Cloud Platform]
 
 https://cloud.google.com/certification?hl=ko[Google Cloud Certifications]
 
-=== App Engine New Application with Python
+### App Engine New Application with Python
 * app.yaml
 * main.py
 ```python
@@ -384,7 +384,7 @@ def hello():
 	return 'Hello'
 ```
 * requurements.tx
-[source, shell]
+``` shell
 ----
 gcloud projects create [id]
 gcloud projects describe [id]

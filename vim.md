@@ -1,7 +1,7 @@
-= vim
+# vim
 
-== MIssions
-=== setting
+## MIssions
+### setting
 * [x] change color scheme listing available options
 * [x] set fileencodings priorities
 * [x] nmap, imap, vmap in the .vimrc file
@@ -9,7 +9,7 @@
 * [x] apply colorscheme desert for cc, cpp, C files
 * [ ] set tab to be 4 spaces
 
-=== file management
+### file management
 * [x] find current encoding, fileencoding :set encoding, :set fileencoding
 * [x] open just closed file again
 * [x] open this file with other application
@@ -19,7 +19,7 @@
 * [ ] display fil ename and location 
 * [x] open a buffer with no name from command mode
 
-=== move+edit
+### move+edit
 * [x] start replace mode (r & R)
 * [x] delete last three letters of all the lines
 * [ ] change cases in visual mode
@@ -42,7 +42,7 @@
 * [ ] apply code formatting (G or selected)
 * [x] know the difference of ciw/caw/caW/ciW
 
-=== split/tab
+### split/tab
 * [x] swap windows in split window
 * [x] change horizontal split to vertical split
 * [x] diff two tex files
@@ -50,7 +50,7 @@
 * [x] open multiple files in vertical/horizontal split windows
 * [x] open multiple files in tab windows
 
-=== automation
+### automation
 * [x] enter date and time
 * [x] increment a number
 * [ ] open <iostream> in a viertical split windows
@@ -60,9 +60,9 @@
 * [ ] install tagList plug-in
 * [ ] macro to change cases inside parenthes
 
-=== registers
+### registers
 * [x] view registers
 * [x] copy to a named register and use it
 
-=== bookmarks
+### bookmarks
 * [x] make a bookmark and use it

@@ -1,8 +1,8 @@
-= Programming on Windows
+# Programming on Windows
 :toc: left
 :sectnums:
 
-== Windows API
+## Windows API
 .Skeleton
 ====
 [source, c++]
@@ -13,19 +13,19 @@ int WINAPI WinMain(HINSTANCE hhInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 }
 ====
 
-=== Nomenclature
+### Nomenclature
 WINAPI:: __stdcall
 HINSTANCE::
 LPSTR:: CHAR *LPSTR
 MB_OK:: ok
 
 
-== MFC
+## MFC
 
 
-== Basic
-http://www.functionx.com/visualc/gdi/gdicoord.htm[GDI Coordinate Systems]
+## Basic
+[GDI Coordinate Systems](http://www.functionx.com/visualc/gdi/gdicoord.htm)
 
-https://www.codeproject.com/Questions/605822/ZoomingplususingplusViewport[Zooming using Viewport]
+[Zooming using Viewport](https://www.codeproject.com/Questions/605822/ZoomingplususingplusViewport)
 
-http://www.winprog.org/tutorial/menus.html[Menus and Icons]
+[Menus and Icons](http://www.winprog.org/tutorial/menus.html)
