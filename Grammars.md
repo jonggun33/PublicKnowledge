@@ -5,16 +5,13 @@
 int a = 0;
 char b = 'b';
 ```
-
 ```python
 int a = 0
 char b = 'b'
 ```
-
 ```javascript
 let a = 0
 ```
-
 ### Time & Date
 
 ## Pointer & References

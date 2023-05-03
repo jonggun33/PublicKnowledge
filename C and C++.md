@@ -1,33 +1,22 @@
 # C & C++
-sub title
-jonggun Gim <jonggun.gim@gmail.com>
-:description: This document is for amassing knowledge of C++ programming and additionally for preparing for the competitive programming.
-:author: Jonggun Gim
-:sectnums:
-:toc: left
-:doctype: manpage
-:source-highlighter: highlight.js
-
 ## About this document
-{description}
+This document is for amassing knowledge of C++ programming and additionally for preparing for the competitive programming.
 
 ## Compile and Link
 ### clang
 #### compiler options
 * /c:  compile without linking
 * /O: Optimization
-** s: favors small code
-** t: favors fast code
+	* s: favors small code
+	* t: favors fast code
 
 ### make Makefile
 ``` bash
-----
 CC=g++
 CFLAGS=-Wall
 LDFLAGS=
 OBJS=
 TARGET=a.out
-```
 
 all: $(TARGET)
 
@@ -37,7 +26,7 @@ clean:
   
 $(TARGET): $(OBJS)
 $(CC) -o $@ $(OBJS)
-----
+```
 * $@: 현재 TARGET 이름
 * $^: 현재 TARGET이 의존하는 대상들의 전체 목록
 * $?: 현재 TARGET이 의존하는 대상중 변경된 것의 목록
@@ -46,12 +35,10 @@ $(CC) -o $@ $(OBJS)
 
 
 ## Basics
-####
-[엄마와 어린이를 위한 C++ 기초](https://docs.google.com/document/d/1-snJLOrtmSSvS4KDs5cHE8o48dxwHhEGY5qQSrhhDAE/edit?usp=drivesdk)
-####
-[Learn C++](https://www.learncpp.com/)
-[An Overview of C++ STL Containers - Embedded Artistry](https://embeddedartistry.com/blog/2017/08/02/an-overview-of-c-stl-containers/?format=amp)
-[Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)
+- [엄마와 어린이를 위한 C++ 기초](https://docs.google.com/document/d/1-snJLOrtmSSvS4KDs5cHE8o48dxwHhEGY5qQSrhhDAE/edit?usp=drivesdk)
+- [Learn C++](https://www.learncpp.com/)
+- [An Overview of C++ STL Containers - Embedded Artistry](https://embeddedartistry.com/blog/2017/08/02/an-overview-of-c-stl-containers/?format=amp)
+- [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)
 
 ## TIPS
 [Migrating from C to C++: Take Advantage of RAII/SBRM - Embedded Artistry](https://embeddedartistry.com/blog/2017/07/17/migrating-from-c-to-c-take-advantage-of-raii-sbrm/)

@@ -54,7 +54,7 @@
 * [x] enter date and time
 * [x] increment a number
 * [ ] open <iostream> in a viertical split windows
-* [x] show abbreviations
+- [X] show abbreviations
 * [ ] create/use abbreviations from command mode
 * [ ] map/unmap from command mode
 * [ ] install tagList plug-in

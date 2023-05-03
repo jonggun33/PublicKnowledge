@@ -1,25 +1,22 @@
-= Git
-
-== Merging two repositories
-[source, bash]
+## Merging two repositories
+```bash
 git remote add [new branch/repository name] [url]
 git fetch [new branch name]
 git merge remotes/[new branch name]/master
-
-== Conflict Resolution
+```
+## Conflict Resolution
 Conflicts can occur during a pull or merge: but the procedures to resolve them are essentially the same.
 
-=== Conflict during a pull
+### Conflict during a pull
 If same files locally revised are also revised on the remote, it will tell you that a conflict has arisen and the file(s) will be decorated with conspicuous markings incorporating changes from both commits.
 You will have to manually edit the file to satisfy both intentions of editings, and then commit it.
-
-[source, bash]
+```bash
 git pull
 //edit the conflicted file
 git commit -a -m "conflict resolved"
 git push
-
-=== Conflict during a merge
+```
+### Conflict during a merge
 The Pull Request from the Github page will warn you of conflicts if any.
 If the conflicts are trivial, Github page will let you resolve them on the web, otherwise, you will:
 
@@ -29,8 +26,7 @@ If the conflicts are trivial, Github page will let you resolve them on the web, 
 . Manually de-conflict
 . Commit
 . Push -- this will dismantle the conflcit on the Pull Request Page and also close the Pull request.
-
-[source, bash]
+```bash
 git checkout feature
 git pull
 git checkout master
@@ -39,3 +35,4 @@ git merge
 //edit the conflicted files
 git commit -a -m "conflict resolved"
 git push
+```

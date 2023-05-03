@@ -1,15 +1,5 @@
 # Python
-jonggun Gim <jonggun.gim@gmail.com>
-:description: This document is for amassing my know-how's about the python language to be transferred to others.
-:author: Jonggun Gim
-:sectnums:
-:toc: left
-:doctype: manpage
-:source-highlighter: highlight.js
-
-## About this document
-{description}
-
+**This document is for amassing my know-how's about the python language to be transferred to others.**
 
 ## Grammar
 [Python Cheatsheet](https://perso.limsi.fr/pointal/_media/python:cours:mementopython3-english.pdf)
@@ -141,8 +131,7 @@ def append_to_list(x):
 global_list = []
 def append_to_list(x):
     global_list.append(x)
-```
-    
+```   
 #### Loop
 ``` python
 from functools import reduce
@@ -160,7 +149,6 @@ total = reduce(lambda acc, n: acc + n, squared_odds)
 * [How to rewrite your SQL queries in Pandas, and more](https://medium.com/jbennetcodes/how-to-rewrite-your-sql-queries-in-pandas-and-more-149d341fc53e)
 
 ### Change Detection
-
 * [Contextual Changepoint Detection with Python and R using RPy2](https://medium.com/bigdatarepublic/contextual-changepoint-detection-with-python-and-r-using-rpy2-fa7d86259ba9)
 * [A Brief Introduction to Change Point Detection using Python - Tech Rando](https://techrando.com/2019/08/14/a-brief-introduction-to-change-point-detection-using-python/)
 

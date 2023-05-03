@@ -1,9 +1,8 @@
 # English Grammar Essentials
 
-> English gammar is, in essence, all about correctly transforming simple sentences into more complex ones and making sure components of sentences stay synchronized in the process.
+ _English gammar is, in essence, all about correctly transforming simple sentences into more complex ones and making sure components of sentences stay synchronized in the process._
 
 The transformation occurs when you want to make the simple sentence to be:
-
 - Negated
 - Questionized
 - Tensed
@@ -16,7 +15,6 @@ The transformation occurs when you want to make the simple sentence to be:
 - Emphasized
     
 You should be careful to syncrhonize following components when composing sentecnes:
-
 - Gender/Pluraility of Personal Pronouns
 - Article
 - Adjective/Adverb 
@@ -24,11 +22,8 @@ You should be careful to syncrhonize following components when composing sentecn
 
 ## Transformation
 Let's start with two simple sentences each describing a state and an action:
-
-----
- The Universe is wide.
- I observe the universe.
-----
+ **The Universe is wide.**  
+ **I observe the universe.**
 
 ### Negation
 _The univers is not wide compared to the multiverse._  
@@ -85,7 +80,6 @@ _Widest is the Universe._
 _If the universe was smaller, start could not have been born._  
 _If I had observed the universe harder in middle shcool, I could have become a greater scholar._
 
-
 ## Syncrhonization
 The bold parts of a sentence should be consistent in following points:
 
@@ -96,7 +90,7 @@ The *Multiverses* **are** wide.
 *I* *am* observant.  
 *You* *are* observant.  
 *He* *is* observant.  
-[underline]#They# **are** observant.
+They **are** observant.
 
 There are *many* universe**s**.  
 I spent *countless* night**s** observing the universe.

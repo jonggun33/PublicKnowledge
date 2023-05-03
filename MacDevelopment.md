@@ -7,7 +7,7 @@
 [Objective-C Hello World Tutorial - JournalDev](https://www.journaldev.com/9512/objective-c-hello-world-tutorial)
 
 ### Basic Structure
-.main.h
+- main.h
 ```objective-c
 #import <Foundation/Foundation.h>
 @interface BMI : NSObject{    //@interface ## class
@@ -18,7 +18,7 @@
 @end
 ```
 
-.main.m
+main.m
 ```objective-c
 #import "main.h"
 @implementation BMI
@@ -42,7 +42,7 @@ int main(int argc, const char* argv[]){
 }
 ```
 
-### Method (##Function, ==Message) Definition/Calling
+### Method (Function, Message) Definition/Calling
 ```objective-c
 - (int)addX: (int)x toY:(int)y {
   return x+y;
@@ -63,22 +63,24 @@ NSMutableArray* sports = [NSMutableArray arrayWithObjects: @"Cricket", @"Footbal
 NSSet countries;
 NSDictionary capitals;
 ```
-
 ## Application Structure
 ### Objective-C, iOS
 .Files
-[format="csv", cols="2"]
-|###
 main.m, main file
 AppDelegate, :UIResponder <UIApplicationDelegate>
 ViewController, :UIViewController
 Main.storyboard,
 LaunchScree.storyboard,
 info.plist, 
-|###
+
+```objective-c
+```
+
 
 .ViewController.h
 ```objective-c
+
+```C
 @interface ViewController: UIViewController{
   IBOutlet UILabel* label;
 }
